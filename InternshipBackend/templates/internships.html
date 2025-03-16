@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Internship Details</h1>
+
+    <form method="GET" action="/internships">
+        <input type="text" name="search" placeholder="Search by Student Name, Company, or Location" value="{{ search_query }}">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if internships %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Student Name</th>
+                <th>Year</th>
+                <th>Company Name</th>
+                <th>Location</th>
+                <th>Work Details</th>
+                <th>Stipend</th>
+                <th>Duration</th>
+                <th>From Date</th>
+                <th>To Date</th>
+                <th>Internship Type</th>
+                <th>Internal Details</th>
+                <th>Certificate</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for internship in internships %}
+            <tr>
+                <td>{{ internship.id }}</td>
+                <td>{{ internship.student_name }}</td>
+                <td>{{ internship.year }}</td>
+                <td>{{ internship.company_name }}</td>
+                <td>{{ internship.location }}</td>
+                <td>{{ internship.work_details }}</td>
+                <td>{{ internship.stipend }}</td>
+                <td>{{ internship.duration }}</td>
+                <td>{{ internship.from_date }}</td>
+                <td>{{ internship.to_date }}</td>
+                <td>{{ internship.internship_type }}</td>
+                <td>{{ internship.internal_details }}</td>
+                <td>
+                    {% if internship.certificate_path %}
+                        <a href="{{ url_for('static', filename='uploads/' + internship.certificate_path) }}" target="_blank">View Certificate</a>
+                    {% else %}
+                        No Certificate Uploaded
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No internship records found.</p>
+    {% endif %}
+
+</body>
+</html>

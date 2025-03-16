@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIES Graduate School of Technology - Internship Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="College Logo" class="logo">
+        <h1>SIES Graduate School of Technology</h1>
+        <h2>Internship Portal</h2>
+
+        <p>Welcome to the official internship portal of SIES GST. Students can log in to submit their internship details, and faculty can access internship records.</p>
+
+        <div class="buttons">
+            <a href="http://127.0.0.1:5000/login"><button class="btn">Student Login</button></a>
+            <a href="http://127.0.0.1:5000/login"><button class="btn">Faculty Login</button></a>
+            <a href="http://127.0.0.1:5000/internships"><button class="btn primary">Internship Details</button></a>
+        </div>
+    </div>
+
+</body>
+</html>

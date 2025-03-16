@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Internship Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Upload Internship Details</h1>
+
+    <form action="{{ url_for('upload_internship') }}" method="POST" enctype="multipart/form-data">
+        <label for="year">Year:</label>
+        <input type="text" id="year" name="year" required>
+
+        <label for="company_name">Company Name:</label>
+        <input type="text" id="company_name" name="company_name" required>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required>
+
+        <label for="work_details">Work Details:</label>
+        <textarea id="work_details" name="work_details" required></textarea>
+
+        <label for="stipend">Stipend (if any):</label>
+        <input type="text" id="stipend" name="stipend">
+
+        <label for="duration">Duration (in months):</label>
+        <input type="text" id="duration" name="duration" required>
+
+        <label for="from_date">From Date:</label>
+        <input type="date" id="from_date" name="from_date" required>
+
+        <label for="to_date">To Date:</label>
+        <input type="date" id="to_date" name="to_date" required>
+
+        <label for="internship_type">Internship Type:</label>
+        <select id="internship_type" name="internship_type">
+            <option value="internal">Internal</option>
+            <option value="external">External</option>
+        </select>
+
+        <label for="internal_details">If Internal, provide details:</label>
+        <input type="text" id="internal_details" name="internal_details">
+
+        <label for="certificate">Upload Certificate:</label>
+        <input type="file" id="certificate" name="certificate" required>
+
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+</html>
