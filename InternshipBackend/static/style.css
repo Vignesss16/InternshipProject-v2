@@ -1,58 +1,87 @@
-/* General Page Styling */
+/* 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f8f9fa;
     margin: 0;
     padding: 0;
     text-align: center;
 }
 
-/* Heading */
-h1 {
-    color: #004080;
-    margin: 20px 0;
-}
 
-/* Search Bar */
-form {
+.container {
+    width: 90%;
+    max-width: 1200px;
     margin: 20px auto;
-    width: 50%;
-    display: flex;
-    justify-content: center;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-input[type="text"] {
+
+h1, h2 {
+    color: #004080;
+    margin-bottom: 10px;
+}
+
+
+.search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.search-container form {
+    display: flex;
+    flex-grow: 1;
+}
+
+.search-container input {
     width: 60%;
     padding: 8px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 4px;
+    font-size: 16px;
 }
 
-button {
-    padding: 8px 15px;
+.search-container .btn {
+    padding: 8px 12px;
     margin-left: 10px;
-    background-color: #004080;
+    background: #004080;
     color: white;
     border: none;
+    border-radius: 4px;
     cursor: pointer;
-    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
 }
 
-button:hover {
-    background-color: #003366;
+.search-container .btn:hover {
+    background: #002b55;
 }
 
-/* Table Styling */
+.download-btn {
+    background: #28a745;
+    margin-left: 10px;
+}
+
+.download-btn:hover {
+    background: #218838;
+}
+
+/
 table {
-    width: 90%;
-    margin: 20px auto;
+    width: 100%;
     border-collapse: collapse;
+    margin-top: 10px;
     background: white;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid black;
 }
 
 th, td {
-    border: 1px solid #ddd;
+    border: 1px solid black; 
     padding: 10px;
     text-align: center;
 }
@@ -60,17 +89,18 @@ th, td {
 th {
     background-color: #004080;
     color: white;
+    padding: 12px;
 }
 
 tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background: #f2f2f2;
 }
 
 tr:hover {
-    background-color: #f1f1f1;
+    background: #f1f1f1;
 }
 
-/* Certificate Link */
+
 a {
     color: #004080;
     text-decoration: none;
@@ -79,4 +109,682 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+
+.flash-messages {
+    margin-bottom: 10px;
+}
+
+.flash-messages p {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+
+.login-container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    margin: 50px auto;
+}
+
+.login-container h1 {
+    color: #004080;
+    margin-bottom: 10px;
+}
+
+.login-container h2 {
+    color: #004080;
+    margin-bottom: 20px;
+}
+
+.login-container input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #004080;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.login-container button:hover {
+    background-color: #002b55;
+}
+
+.login-container p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.login-container a {
+    color: #004080;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+}
+
+ */
+
+
+
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+ /* * {
+    transition: all 0.1s ease-in-out;
+    box-sizing: border-box;
+  } */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    animation: fadeInBody 1s ease-in;
+}
+
+@keyframes fadeInBody {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    animation: popIn 0.7s ease-out;
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+h1, h2 {
+    color: #004080;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+
+.logo {
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+
+.buttons {
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    margin: 10px;
+    background: #004080;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn.primary {
+    background: #28a745;
+}
+
+.btn:hover {
+    background: #003366;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #004080, 0 0 20px #004080;
+}
+
+a {
+    color: #004080;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+.flash-messages {
+    margin-bottom: 10px;
+}
+
+.flash-messages p {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid black;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #004080;
+    color: white;
+    padding: 12px;
+}
+
+tr:nth-child(even) {
+    background: #f2f2f2;
+}
+
+tr:hover {
+    background: #f1f1f1;
+}
+
+
+/* .login-container {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    margin: 60px auto;
+    animation: slideIn 0.8s ease-out;
+} */
+
+/* Layout and positioning for login container */
+/* .login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* padding: 2rem; */
+    /* padding: 12px;
+    gap: 1rem;
+    width: 100%;
+    max-width: 400px;
+    /* margin: auto; */
+    /* margin: 10px 0;
+ } */
+
+
+.login-container input[type="password"],
+.login-container input[type="text"] {
+    width: 90%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+
+
+
+/* Glass effect for login container */
+.login-container.glass {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 16px;
+    padding: 30px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    color: #000;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.login-container h1, .login-container h2 {
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.151);
+}
+
+.login-container input {
+    width: 90%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+
+.login-container button {
+    width: 90%;
+    padding: 12px;
+    background-color: #004080;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: 0.3s;
+    margin-top: 10px;
+    box-sizing: border-box; /* ✅ Add this */
+}
+
+
+.login-container button:hover {
+    background-color: #003366;
+    transform: scale(1.03);
+    box-shadow: 0 0 12px rgba(0, 64, 128, 0.4);
+}
+
+.login-container p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.login-container a {
+    color: #004080;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+}
+
+.login-title {
+    font-size: 30px;
+    font-weight: 300;
+    color: #1f1f1f;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.portal-subtitle {
+    font-size: 23px;
+    color: #d88508;
+    font-weight: 500;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.login-container input,
+.login-container button {
+    font-size: 16px;
+}
+
+
+/* .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, #516da0, #cfdef3);
+    animation: fadeInBody 1s ease-in;
+} */
+
+.hero {
+    min-height: 100vh;
+    background: url("college.jpg") no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+
+.content-box {
+    background: rgba(255, 255, 255, 0.2); /* light transparent white */
+    backdrop-filter: blur(15px); /* blur the background behind */
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 16px;
+    padding: 30px;
+    max-width: 800px;
+    margin: 60px auto;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    color: #000;
+}
+
+
+
+.content-box .logo {
+    width: 80px;
+    margin-bottom: 20px;
+}
+
+.content-box h1 {
+    font-size: 26px;
+    color: #004080;
+    margin-bottom: 5px;
+}
+
+.content-box h2 {
+    font-size: 20px;
+    color: #004080;
+    margin-bottom: 15px;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.register-text {
+    font-size: 14px;
+    color: #444;
+}
+
+.register-text a {
+    color: #004080;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.register-text a:hover {
+    text-decoration: underline;
+}
+
+
+
+
+
+/* Frosted Glass Container */
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1); /* transparent white */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px); /* frosted glass effect */
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Improve headings */
+.container h1, .container h2 {
+    color: #fff;
+    text-shadow: 1px 1px 2px #000;
+}
+
+/* Improve paragraph */
+.container p {
+    color: #f0f0f0;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Buttons with glow effect */
+.buttons .btn {
+    padding: 12px 20px;
+    margin: 10px;
+    background: #004080;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 64, 128, 0.4);
+}
+
+.buttons .btn.primary {
+    background: #007bff;
+}
+
+.buttons .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(0, 64, 128, 0.6);
+}
+
+/* Link styling */
+.container a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.3); /* Optional brightness adjust */
+    z-index: -1;
+}
+
+/* Dashboard background with image */
+.dashboard-background {
+    background-image: url("../static/dashboard-bg.jpg"); /* update the path if needed */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    padding: 60px 20px;
+}
+
+/* Stylish dashboard container */
+.dashboard-container {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 40px 30px;
+    border-radius: 15px;
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box; /* ✅ this makes padding behave properly */
+}
+
+/* Button group style */
+.button-group {
+    margin-top: 30px;
+}
+
+.button-group .btn {
+    padding: 12px 20px;
+    margin: 10px;
+    font-size: 16px;
+    border: none;
+    background-color: #004080;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.button-group .btn:hover {
+    background-color: #022fc4;
+}
+
+.button-group .btn.primary {
+    background-color: #28a745;
+}
+
+.button-group .btn.primary:hover {
+    background-color: #218838;
+}
+
+/* Dashboard logo */
+.dashboard-logo {
+    max-width: 100px;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* Glow and Glass Effect Inputs */
+.registration-form input,
+.registration-form select {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box; /* ✅ keeps width inside container */
+  padding: 15px;
+  margin: 12px 0;
+  font-size: 17px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.25);
+  color: #000;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.registration-form input:focus,
+.registration-form select:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 128, 255, 0.7);
+  transform: scale(1.02);
+}
+
+/* Submit Button with glow */
+.btn-glow {
+  padding: 15px;
+  width: 100%;
+  font-size: 17px;
+  background-color: #004080;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(0, 64, 128, 0.4);
+}
+
+.btn-glow:hover {
+  background-color: #0066cc;
+  box-shadow: 0 0 15px rgba(0, 128, 255, 0.7);
+  transform: scale(1.02);
+}
+
+/* .back-link {
+    color: #960505; 
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: #cc5c00; 
+    text-decoration: underline;
+} */
+a.back-link {
+    color: #d6b005 !important; /* Use !important to override any other style */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+a.back-link:hover {
+    color: #ff3a7c !important;
+    text-decoration: underline;
+}
+
+ul.flashes {
+    list-style: none;
+    padding: 10px;
+    margin: 10px 0;
+    color: red;
+    font-weight: bold;
+}
+
+
+/* Keeps Show Password checkbox aligned under input */
+.toggle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    margin-left: 25px;
+    color: white; /* or #000 if dark-on-light */
+}
+
+.toggle-wrapper input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
 }

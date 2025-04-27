@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,22 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIES Graduate School of Technology - Internship Portal</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background: url('{{ url_for("static", filename="college.jpg") }}') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
+    <div class="overlay"></div>
+    <div class="hero">
+        <div class="content-box">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="College Logo" class="logo">
 
-    <div class="container">
-        <img src="{{ url_for('static', filename='logo.png') }}" alt="College Logo" class="logo">
-        <h1>SIES Graduate School of Technology</h1>
-        <h2>Internship Portal</h2>
+            <h1>SIES Graduate School of Technology</h1>
+            <h2>Internship Portal</h2>
+            <p class="subtitle">
+                Welcome to the official internship portal of SIES GST.<br>
+                Students can log in to submit their internship details, and faculty can access internship records.
+            </p>
 
-        <p>Welcome to the official internship portal of SIES GST. Students can log in to submit their internship details, and faculty can access internship records.</p>
+            <div class="button-group">
+                <a href="{{ backend_base_url }}/login"><button class="btn">Student Login</button></a>
+                <a href="{{ backend_base_url }}/faculty_login"><button class="btn">Faculty Login</button></a>
 
-        <div class="buttons">
-            <a href="http://127.0.0.1:5000/login"><button class="btn">Student Login</button></a>
-            <a href="http://127.0.0.1:5000/login"><button class="btn">Faculty Login</button></a>
-            <a href="http://127.0.0.1:5000/internships"><button class="btn primary">Internship Details</button></a>
+               
+            </div>
+
+            <p class="register-text">Don’t have an account? <a href="{{ backend_base_url }}/register">Register here</a></p>
         </div>
     </div>
 
 </body>
 </html>
+

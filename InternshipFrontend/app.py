@@ -16,13 +16,15 @@ def get_db_connection():
     return mysql.connector.connect(
         host="localhost",
         user="root",
-        password="your_password",  # Replace with actual password
+        password="your_password", 
         database="internship_db"
     )
 
 @app.route('/')
 def home():
-    return render_template("index.html")
+    backend_base_url = "http://127.0.0.1:5000"  # Or "https://your-backend.com"
+    return render_template("index.html", backend_base_url=backend_base_url)
+
 
 @app.route('/internship-details')
 def internship_details():
@@ -66,5 +68,6 @@ def upload_internship():
 
     return render_template("upload.html")
 
-if __name__ == "__main__":
-    app.run(port=5001, debug=True)
+
+if __name__ == '__main__':
+    app.run(debug=True, port=5001)  # Frontend on port 5001 , we will change this after hosting

@@ -1,68 +1,217 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Internship Details</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #FF69B4, #8A2BE2, #99473e, #b36e31);
+            margin: 0;
+            padding: 20px;
+            color: white;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        input, select {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            color: black;
+            min-width: 200px;
+            flex: 1;
+        }
+
+        input::placeholder {
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        .btn {
+            padding: 10px 15px;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .highlight {
+            border: 2px solid yellow;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        th {
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        a {
+            color: lightblue;
+        }
+
+        @media (max-width: 768px) {
+            form {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Internship Details</h1>
+<div class="container">
+    <h2>Internship Details</h2>
 
-    <form method="GET" action="/internships">
-        <input type="text" name="search" placeholder="Search by Student Name, Company, or Location" value="{{ search_query }}">
-        <button type="submit">Search</button>
+    <form method="GET" action="{{ url_for('internships') }}">
+        <input type="text" name="search" placeholder="Search by PRN, Name, Company or Location"
+               value="{{ request.args.get('search', '') }}"
+               {% if request.args.get('search') %}class="highlight"{% endif %}>
+    
+        <select name="year" {% if request.args.get('year') %}class="highlight"{% endif %}>
+            <option value="">All Years</option>
+            <option value="SE" {% if request.args.get('year') == 'SE' %}selected{% endif %}>SE</option>
+            <option value="TE" {% if request.args.get('year') == 'TE' %}selected{% endif %}>TE</option>
+            <option value="BE" {% if request.args.get('year') == 'BE' %}selected{% endif %}>BE</option>
+        </select>
+    
+        <select name="internship_type" {% if request.args.get('internship_type') %}class="highlight"{% endif %}>
+            <option value="">All Types</option>
+            <option value="Internal" {% if request.args.get('internship_type') == 'Internal' %}selected{% endif %}>Internal</option>
+            <option value="External" {% if request.args.get('internship_type') == 'External' %}selected{% endif %}>External</option>
+        </select>
+    
+        <input type="text" name="academic_year" list="year-options"
+               placeholder="Academic Year (e.g., 2023-2024)"
+               value="{{ request.args.get('academic_year', '') }}"
+               {% if request.args.get('academic_year') %}class="highlight"{% endif %}>
+        <datalist id="year-options">
+            {% for y in range(2020, current_year + 1) %}
+                <option value="{{ y }}-{{ y + 1 }}">
+            {% endfor %}
+        </datalist>
+    
+        <button type="submit" class="btn">Apply Filters</button>
+    
+        {% if role == 'faculty' %}
+            <a href="{{ url_for('download_internships', **request.args) }}" class="btn">Download Filtered Excel</a>
+            <a href="{{ url_for('download_internships') }}" class="btn">Download All Data</a>
+        {% endif %}
+    
+        <a href="{{ url_for('internships') }}" class="btn">Clear Filters</a>
+        <!-- <a href="{{ url_for('home') }}" class="btn">Back to Home</a> -->
+        {% if session['role'] == 'student' %}
+            <a href="{{ url_for('student_dashboard') }}" class="btn">Back to Home</a>
+        {% elif session['role'] == 'faculty' %}
+            <a href="{{ url_for('faculty_dashboard') }}" class="btn">Back to Home</a>
+        {% endif %}
     </form>
+    
 
-    {% if internships %}
-    <table border="1">
+   
+
+    <table>
         <thead>
-            <tr>
-                <th>ID</th>
-                <th>Student Name</th>
-                <th>Year</th>
-                <th>Company Name</th>
-                <th>Location</th>
-                <th>Work Details</th>
-                <th>Stipend</th>
-                <th>Duration</th>
-                <th>From Date</th>
-                <th>To Date</th>
-                <th>Internship Type</th>
-                <th>Internal Details</th>
-                <th>Certificate</th>
-            </tr>
+          <tr>
+            <th>PRN</th>
+            <th>Student Name</th>
+            <th>Year</th>
+            <th>Company Name</th>
+            <th>Location</th>
+            <th>Work Details</th>
+            <th>Stipend</th>
+            <th>Duration</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Type</th>
+            <th>Certificate</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
         </thead>
         <tbody>
-            {% for internship in internships %}
-            <tr>
-                <td>{{ internship.id }}</td>
-                <td>{{ internship.student_name }}</td>
-                <td>{{ internship.year }}</td>
-                <td>{{ internship.company_name }}</td>
-                <td>{{ internship.location }}</td>
-                <td>{{ internship.work_details }}</td>
-                <td>{{ internship.stipend }}</td>
-                <td>{{ internship.duration }}</td>
-                <td>{{ internship.from_date }}</td>
-                <td>{{ internship.to_date }}</td>
-                <td>{{ internship.internship_type }}</td>
-                <td>{{ internship.internal_details }}</td>
-                <td>
-                    {% if internship.certificate_path %}
-                        <a href="{{ url_for('static', filename='uploads/' + internship.certificate_path) }}" target="_blank">View Certificate</a>
-                    {% else %}
-                        No Certificate Uploaded
-                    {% endif %}
-                </td>
-            </tr>
-            {% endfor %}
+          {% for internship in internships %}
+          <tr>
+            <td>{{ internship.prn }}</td>
+            <td>{{ internship.student_name }}</td>
+            <td>{{ internship.year }}</td>
+            <td>{{ internship.company_name }}</td>
+            <td>{{ internship.location }}</td>
+            <td>{{ internship.work_details }}</td>
+            <td>{{ internship.stipend }}</td>
+            <td>{{ internship.duration }}</td>
+            <td>{{ internship.from_date }}</td>
+            <td>{{ internship.to_date }}</td>
+            <td>{{ internship.internship_type }}</td>
+            <td><a href="{{ url_for('static', filename='uploads/' ~ internship.certificate_path) }}" target="_blank">View</a></td>
+      
+            {% if role == 'faculty' or (role == 'student' and internship.prn == prn) %}
+              <td><a href="{{ url_for('edit_internship', id=internship.id) }}">Edit</a></td>
+              <td><a href="{{ url_for('delete_internship', id=internship.id) }}">Delete</a></td>
+            {% else %}
+              <td></td>
+              <td></td>
+            {% endif %}
+          </tr>
+          {% endfor %}
         </tbody>
-    </table>
-    {% else %}
-        <p>No internship records found.</p>
-    {% endif %}
+      </table>      
+</div>
 
 </body>
 </html>

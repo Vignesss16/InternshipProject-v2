@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Faculty Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-background">
+
+    <div class="dashboard-container">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="College Logo" class="dashboard-logo">
+        <h1>Welcome to Faculty Dashboard</h1>
+        <p class="dashboard-subtitle">Manage and download internship records.</p>
+
+        <div class="button-group">
+            <a href="{{ url_for('view_internships') }}"><button class="btn">View Internships</button></a>
+            <a href="{{ url_for('download_internships') }}"><button class="btn">Download as Excel</button></a>
+            <a href="{{ url_for('logout') }}"><button class="btn primary">Logout</button></a>
+        </div>
+    </div>
+
+</body>
+</html>

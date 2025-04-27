@@ -1,22 +1,19 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - SIES Graduate School of Technology</title>
+    <title>Faculty Login - SIES Graduate School of Technology</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
-    <div class="overlay"></div> <!-- Optional soft overlay for readability -->
+<body>
+    <div class="overlay"></div>
     <div class="hero">
         <div class="login-container glass">
             <img src="{{ url_for('static', filename='logo.png') }}" alt="College Logo" class="logo">
-            <h1 class="login-title">Sign in</h1>
+            <h1 class="login-title">Faculty Login</h1>
             <h2 class="portal-subtitle">Internship Portal - SIES GST</h2>
-            
-            
 
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
@@ -28,14 +25,26 @@
                 {% endif %}
             {% endwith %}
 
-            <form method="POST" action="{{ url_for('login') }}">
-                <input type="email" id="email" name="email" placeholder="Email" required>
-                <input type="password" id="password" name="password" placeholder="Password" required>
+            <form method="POST" action="{{ url_for('faculty_login') }}">
+                <input type="password" id="password" name="password" placeholder="Faculty Access Password" required>
+
+                <div class="toggle-wrapper">
+                    <input type="checkbox" id="toggle-password" onclick="togglePassword()">
+                    <label for="toggle-password">Show Password</label>
+                </div>
+
                 <button type="submit" class="btn primary">Login</button>
             </form>
-            
-            <p><a href="{{ url_for('logout', _external=True) }}" class="back-link">← Back to Home</a></p>
+
+            <p><a href="{{ url_for('home') }}" class="back-link">← Back to Home</a></p>
         </div>
     </div>
+
+    <script>
+        function togglePassword() {
+            const x = document.getElementById("password");
+            x.type = x.type === "password" ? "text" : "password";
+        }
+    </script>
 </body>
 </html>

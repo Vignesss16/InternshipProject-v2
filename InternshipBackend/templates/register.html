@@ -1,35 +1,61 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Registration - Internship Portal</title>
+  <title>Register - Internship Portal</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
-  <h1>Student Registration</h1>
-  {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-      <div class="flash-messages">
-        {% for category, message in messages %}
-          <p class="{{ category }}">{{ message }}</p>
-        {% endfor %}
-      </div>
-    {% endif %}
-  {% endwith %}
-  <form method="POST" action="{{ url_for('register') }}">
-    <label for="username">Username:</label>
-    <input type="text" name="username" id="username" required>
-    <br>
-    <label for="password">Password:</label>
-    <input type="password" name="password" id="password" required>
-    <br>
-    <label for="confirm_password">Confirm Password:</label>
-    <input type="password" name="confirm_password" id="confirm_password" required>
-    <br>
-    <button type="submit">Register</button>
-  </form>
-  <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
-  <p><a href="{{ url_for('home') }}">← Back to Home</a></p>
+<body class="dashboard-background">
+
+  <div class="dashboard-container">
+    <h1 style="margin-bottom: 20px;">Student Registration</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+            <p class="{{ category }}">{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('register') }}" class="registration-form">
+      <input type="text" name="name" placeholder="Full Name" required>
+      <input type="text" id="prn" name="prn" placeholder="PRN" required>
+      <input type="email" name="email" placeholder="Email" required>
+     <!-- <input type="password" id="password" name="password" placeholder="Password" required> -->
+      <input type="password" id="password" name="password" placeholder="Password" required>
+
+      <div class="toggle-wrapper">
+        <input type="checkbox" id="toggle-password" onclick="togglePassword()">
+        <label for="toggle-password">Show Password</label>
+    </div>
+
+
+
+
+      <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+
+      <input type="hidden" name="role" value="student">
+
+      <button type="submit" class="btn-glow">Register</button>
+    </form>
+
+    <div style="margin-top: 25px;">
+      <a href="{{ url_for('login') }}">Already have an account? Login here</a><br>
+      <a href="{{ url_for('home') }}">← Back to Home</a>
+    </div>
+  </div>
+
+  <script>
+      function togglePassword() {
+          const x = document.getElementById("password");
+          x.type = x.type === "password" ? "text" : "password";
+      }
+ </script>
+
 </body>
 </html>
